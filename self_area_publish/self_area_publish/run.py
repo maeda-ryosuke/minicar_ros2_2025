@@ -126,8 +126,12 @@ class SelfAreaPublishNode(Node):
             self.lap_corn_count += 1
         self.last_relative_angle = angle_rad
 
+        # コーン周回オフのときはcorn_countが1で終了
+        if (self.lap_corn_count >= 1) and self.corn_lap_param == 0:
+            return True
+ 
         # 6. 3周完了したか判定
-        if self.lap_corn_count >= 3:
+        if (self.lap_corn_count >= 3) and self.corn_lap_param != 0:
             return True
         else:
             return False
@@ -159,9 +163,9 @@ class SelfAreaPublishNode(Node):
             print("current_y: " + str(current_y))
 
             if self.corn_lap_param==0:
-                self.transition_to('STATE_4') # 状態3へ
+                self.transition_to('STATE_3') # corn_lap_paramが0でもSTATE_3に行くように変更
             else:
-                self.transition_to('STATE_3') # 状態4へ
+                self.transition_to('STATE_3') # 状態3へ
 
     def handle_state_3_pass_b(self):
         """ 
