@@ -1,0 +1,15 @@
+package.xml
+setup.cfg
+setup.py
+build/kalmanfilter/kalmanfilter.egg-info/PKG-INFO
+build/kalmanfilter/kalmanfilter.egg-info/SOURCES.txt
+build/kalmanfilter/kalmanfilter.egg-info/dependency_links.txt
+build/kalmanfilter/kalmanfilter.egg-info/entry_points.txt
+build/kalmanfilter/kalmanfilter.egg-info/requires.txt
+build/kalmanfilter/kalmanfilter.egg-info/top_level.txt
+build/kalmanfilter/kalmanfilter.egg-info/zip-safe
+kalmanfilter/__init__.py
+resource/kalmanfilter
+test/test_copyright.py
+test/test_flake8.py
+test/test_pep257.py

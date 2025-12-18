@@ -1,0 +1,33 @@
+[0.398s] Invoking command in '/home/ryosuke/ros2_ws/src/kalmanfilter': PYTHONPATH=/home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/kalmanfilter build --build-base /home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/build install --record /home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/install.log --single-version-externally-managed install_data
+[0.514s] running egg_info
+[0.515s] creating build/kalmanfilter/kalmanfilter.egg-info
+[0.515s] writing build/kalmanfilter/kalmanfilter.egg-info/PKG-INFO
+[0.515s] writing dependency_links to build/kalmanfilter/kalmanfilter.egg-info/dependency_links.txt
+[0.515s] writing entry points to build/kalmanfilter/kalmanfilter.egg-info/entry_points.txt
+[0.515s] writing requirements to build/kalmanfilter/kalmanfilter.egg-info/requires.txt
+[0.515s] writing top-level names to build/kalmanfilter/kalmanfilter.egg-info/top_level.txt
+[0.515s] writing manifest file 'build/kalmanfilter/kalmanfilter.egg-info/SOURCES.txt'
+[0.516s] reading manifest file 'build/kalmanfilter/kalmanfilter.egg-info/SOURCES.txt'
+[0.516s] writing manifest file 'build/kalmanfilter/kalmanfilter.egg-info/SOURCES.txt'
+[0.516s] running build
+[0.516s] running build_py
+[0.516s] creating /home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/build
+[0.516s] creating /home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/build/lib
+[0.516s] creating /home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/build/lib/kalmanfilter
+[0.516s] copying kalmanfilter/__init__.py -> /home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/build/lib/kalmanfilter
+[0.516s] running install
+[0.516s] running install_lib
+[0.517s] creating /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/lib/python3.10/site-packages/kalmanfilter
+[0.517s] copying /home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/build/lib/kalmanfilter/__init__.py -> /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/lib/python3.10/site-packages/kalmanfilter
+[0.517s] byte-compiling /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/lib/python3.10/site-packages/kalmanfilter/__init__.py to __init__.cpython-310.pyc
+[0.517s] running install_data
+[0.517s] creating /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/share/ament_index
+[0.517s] creating /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/share/ament_index/resource_index
+[0.517s] creating /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/share/ament_index/resource_index/packages
+[0.517s] copying resource/kalmanfilter -> /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/share/ament_index/resource_index/packages
+[0.517s] copying package.xml -> /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/share/kalmanfilter
+[0.517s] running install_egg_info
+[0.518s] Copying build/kalmanfilter/kalmanfilter.egg-info to /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/lib/python3.10/site-packages/kalmanfilter-0.0.0-py3.10.egg-info
+[0.519s] running install_scripts
+[0.532s] writing list of installed files to '/home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/install.log'
+[0.552s] Invoked command in '/home/ryosuke/ros2_ws/src/kalmanfilter' returned '0': PYTHONPATH=/home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/kalmanfilter build --build-base /home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/build install --record /home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/install.log --single-version-externally-managed install_data

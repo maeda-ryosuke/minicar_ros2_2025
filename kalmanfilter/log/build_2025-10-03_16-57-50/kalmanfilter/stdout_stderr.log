@@ -1,0 +1,31 @@
+running egg_info
+creating build/kalmanfilter/kalmanfilter.egg-info
+writing build/kalmanfilter/kalmanfilter.egg-info/PKG-INFO
+writing dependency_links to build/kalmanfilter/kalmanfilter.egg-info/dependency_links.txt
+writing entry points to build/kalmanfilter/kalmanfilter.egg-info/entry_points.txt
+writing requirements to build/kalmanfilter/kalmanfilter.egg-info/requires.txt
+writing top-level names to build/kalmanfilter/kalmanfilter.egg-info/top_level.txt
+writing manifest file 'build/kalmanfilter/kalmanfilter.egg-info/SOURCES.txt'
+reading manifest file 'build/kalmanfilter/kalmanfilter.egg-info/SOURCES.txt'
+writing manifest file 'build/kalmanfilter/kalmanfilter.egg-info/SOURCES.txt'
+running build
+running build_py
+creating /home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/build
+creating /home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/build/lib
+creating /home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/build/lib/kalmanfilter
+copying kalmanfilter/__init__.py -> /home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/build/lib/kalmanfilter
+running install
+running install_lib
+creating /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/lib/python3.10/site-packages/kalmanfilter
+copying /home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/build/lib/kalmanfilter/__init__.py -> /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/lib/python3.10/site-packages/kalmanfilter
+byte-compiling /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/lib/python3.10/site-packages/kalmanfilter/__init__.py to __init__.cpython-310.pyc
+running install_data
+creating /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/share/ament_index
+creating /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/share/ament_index/resource_index
+creating /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/share/ament_index/resource_index/packages
+copying resource/kalmanfilter -> /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/share/ament_index/resource_index/packages
+copying package.xml -> /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/share/kalmanfilter
+running install_egg_info
+Copying build/kalmanfilter/kalmanfilter.egg-info to /home/ryosuke/ros2_ws/src/kalmanfilter/install/kalmanfilter/lib/python3.10/site-packages/kalmanfilter-0.0.0-py3.10.egg-info
+running install_scripts
+writing list of installed files to '/home/ryosuke/ros2_ws/src/kalmanfilter/build/kalmanfilter/install.log'
