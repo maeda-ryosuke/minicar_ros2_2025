@@ -12,4 +12,5 @@ sudo jetson_clocks
 
 echo "--- Setup Complete ---"
 
-python run-1217.py --model ~/notebooks/model_trt/1210_multihead_model_trt.pth --clsmodel ~/notebooks/model_trt/classification_model_trt.pth --run --speed-mode fixed --speed-raw 110 --steering-gain 1.4
+python run-1217.py --model ~/notebooks/model_trt/multihead_model_trt.pth --clsmodel ~/notebooks/model_trt/classification_model_trt.pth --run --speed-mode fixed --speed-raw 110 --steering-gain 1.4
+# 1210_multihead_model_trt.pth

@@ -22,5 +22,5 @@ ekf_filter_node:
     odom0_config: [false, false, false, # x, y, z
                   false, false, false, # roll, pitch, yaw
                   true, true, false, # vx, vy, vz
-                  true, true, true, # vroll, vpitch, vyaw
+                  false, false, true, # vroll, vpitch, vyaw
                   false, false, false] # ax, ay, az

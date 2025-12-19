@@ -22,14 +22,14 @@ def generate_launch_description():
         parameters=[config_file_path]
     )
     # RViz2の起動設定
-    start_rviz2_node = Node(
-        package='rviz2',
-        executable='rviz2',
-        name='rviz2',
-        # arguments=['-d', os.path.join(get_package_share_directory(pkg_name), 'rviz', 'imu_test.rviz')],
-        # もしRViz設定ファイルがなければ上の行はコメントアウトし、下の行を使う
-        output='screen'
-    )
+    # start_rviz2_node = Node(
+    #     package='rviz2',
+    #     executable='rviz2',
+    #     name='rviz2',
+    #     # arguments=['-d', os.path.join(get_package_share_directory(pkg_name), 'rviz', 'imu_test.rviz')],
+    #     # もしRViz設定ファイルがなければ上の行はコメントアウトし、下の行を使う
+    #     output='screen'
+    # )
     
     # static_transform_publisherのノード定義を追加
     static_tf_publisher_node = Node(
@@ -48,8 +48,12 @@ def generate_launch_description():
         ]
     )
     
+    # return LaunchDescription([
+    #     start_robot_localization_node,
+    #     start_rviz2_node,
+    #     static_tf_publisher_node,
+    # ])
     return LaunchDescription([
         start_robot_localization_node,
-        start_rviz2_node,
         static_tf_publisher_node,
     ])

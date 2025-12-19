@@ -163,7 +163,7 @@ class SelfAreaPublishNode(Node):
             print("current_y: " + str(current_y))
 
             if self.corn_lap_param==0:
-                self.transition_to('STATE_3') # corn_lap_paramが0でもSTATE_3に行くように変更
+                self.transition_to('STATE_4') # STATE_4に行くように変更
             else:
                 self.transition_to('STATE_3') # 状態3へ
 
