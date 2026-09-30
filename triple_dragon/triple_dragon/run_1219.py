@@ -107,8 +107,8 @@ IMG_WIDTH = 224
 
 
 ##### ---------- camera読み込み(2個) ---------- #####
-CAM0_FPS=30
-CAM1_FPS=30
+CAM0_FPS=60
+CAM1_FPS=60
 
         
 ##### ---------- 建物(model切り替え) ---------- #####
@@ -179,6 +179,25 @@ def load_model_from_path(path):
         write_log(f"【Error】{p} の読込に失敗: {e}")
         model_loaded = False
         return False
+    
+def load_clsmodel_from_path(path):
+    global clsmodel_trt, clsmodel_loaded
+    p = Path(path)
+    if not p.exists():
+        write_log(f"【Error】 {p} が見つかりません")
+        return False
+    try:
+        write_log(f"{p} をロード中… (初回は時間がかかります)")
+        clsmodel_trt = TRTModule()
+        state_dict = torch.load(p, weights_only=True)
+        clsmodel_trt.load_state_dict(state_dict)
+        clsmodel_loaded = True
+        write_log(f"{p} の読込に成功しました。")
+        return True
+    except Exception as e:
+        write_log(f"【Error】{p} の読込に失敗: {e}")
+        clsmodel_loaded = False
+        return False
 
 def get_memory_usage():
     command = 'tegrastats'
@@ -245,9 +264,11 @@ def live(speed_mode, speed_raw_val, speed_gain_val, steering_gain_val, pwm_left_
         img1 = preprocess(image1).half()
 
         
-        out0 = model_trt(img0).detach().cpu().numpy().flatten()
+        
         out1 = model_trt(img1).detach().cpu().numpy().flatten()
 
+        #probabilities = torch.softmax(out1, dim=1)  # 確信度に変換
+        #predicted_class = torch.argmax(probabilities, dim=1).item()  # 最も確信度の高いクラス
         #out1 = out1.detach().cpu().numpy().flatten()
         #out2 = out2.detach().cpu().numpy().flatten()
         #out3 = out3.detach().cpu().numpy().flatten()
@@ -264,37 +285,58 @@ def live(speed_mode, speed_raw_val, speed_gain_val, steering_gain_val, pwm_left_
             y = float(out1[1])
             x = int(IMG_WIDTH * (x / 2.0 + 0.5))
             y = int(IMG_WIDTH * (y / 2.0 + 0.5))
-            speed = float(out[3])
+            speed = float(out1[3])
         elif area_num == "STATE_2":
-            x = float(out0[4]) * steering_gain_val
-            y = float(out0[5])
+            x = float(out1[4]) * steering_gain_val
+            y = float(out1[5])
             x = int(IMG_WIDTH * (x / 2.0 + 0.5))
             y = int(IMG_WIDTH * (y / 2.0 + 0.5))
-            speed = float(out[7])
+            speed = float(out1[7])
         elif area_num == "area2_center":
-            x = float(out0[8]) * steering_gain_val
-            y = float(out0[9])
+            x = float(out1[8]) * steering_gain_val
+            y = float(out1[9])
             x = int(IMG_WIDTH * (x / 2.0 + 0.5))
             y = int(IMG_WIDTH * (y / 2.0 + 0.5))
-            speed = float(out[11])
+            speed = float(out1[11])
         elif area_num == "area2_right":
-            x = float(out0[12]) * steering_gain_val
-            y = float(out0[13])
+            x = float(out1[12]) * steering_gain_val
+            y = float(out1[13])
             x = int(IMG_WIDTH * (x / 2.0 + 0.5))
             y = int(IMG_WIDTH * (y / 2.0 + 0.5))
-            speed = float(out[15])
+            speed = float(out1[15])
         elif area_num == "STATE_3":
             x = float(out1[16]) * steering_gain_val
             y = float(out1[17])
             x = int(IMG_WIDTH * (x / 2.0 + 0.5))
             y = int(IMG_WIDTH * (y / 2.0 + 0.5))
-            speed = float(out[19])
+            speed = float(out1[19])
         elif area_num == "STATE_4":
-            x = float(out1[20]) * steering_gain_val
-            y = float(out1[21])
+            x = float(out1[8]) * steering_gain_val
+            y = float(out1[9])
             x = int(IMG_WIDTH * (x / 2.0 + 0.5))
             y = int(IMG_WIDTH * (y / 2.0 + 0.5))
-            speed = float(out1[23])
+            speed = float(out1[10])
+        elif area_num == "STATE_PARKING":
+            out1 = clsmodel_trt(img1).detach().cpu().numpy().flatten()
+            x = float(out1[0]) * steering_gain_val
+            y = float(out1[1])
+            x = int(IMG_WIDTH * (x / 2.0 + 0.5))
+            y = int(IMG_WIDTH * (y / 2.0 + 0.5))
+
+        elif area_num == "STATE_END":
+            x = 0.0
+            y = 0.0
+            speed = 0.0
+            break
+            
+        elif area_num == "STACK":
+            x = 0.0
+            speed = -50.0
+
+        else:
+            print("STATEを受け取れませんでした")
+        # elif area_num == "STACK":
+        #     x = 0
         
         handle(x, pwm_left_val, pwm_right_val)
 
@@ -407,7 +449,7 @@ def run_main(args):
     if not load_model_from_path(args.model):
         return
     
-    if not load_model_from_path(args.clsmodel):
+    if not load_clsmodel_from_path(args.clsmodel):
         return
 
     # 設定値

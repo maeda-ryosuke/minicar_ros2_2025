@@ -47,6 +47,9 @@ class SelfAreaPublishNode(Node):
         # コーン周回させるかどうか。デフォルトは0(周回しない)
         self.declare_parameter('corn_lap', 0)
         
+        self.pos_history_x = [] # x座標の履歴を保存するリスト
+        self.HISTORY_SIZE = 30  # 30Hzなので30個で1秒分        
+        
         # 3. パラメータ値を取得
         start_pos_param = self.get_parameter('start_pos').get_parameter_value().integer_value
         self.corn_lap_param = self.get_parameter('corn_lap').get_parameter_value().integer_value
@@ -72,6 +75,7 @@ class SelfAreaPublishNode(Node):
             'STATE_3': self.handle_state_3_pass_b,
             'STATE_4': self.handle_state_4_pass_c,
             'STATE_PARKING': self.handle_parking,
+            'STATE_END': self.handle_end
         }
         
         # 3. タイマー設定 (制御ループ)
@@ -203,7 +207,7 @@ class SelfAreaPublishNode(Node):
             print("current_y: " + str(current_y))
 
             # lap_countが3だったら駐車に移行
-            if self.lap_count >= 3:
+            if self.lap_count >= 100:
                 self.transition_to('STATE_PARKING')
                 return
 
@@ -214,6 +218,31 @@ class SelfAreaPublishNode(Node):
             self.lap_corn_count = 0
 
     def handle_parking(self):
+            """
+            状態 PARKING: 1秒間(30サンプル)の移動距離が閾値以下ならENDへ
+            """
+            current_x = self.latest_odom.pose.pose.position.x
+            
+            # 現在のxを履歴に追加
+            self.pos_history_x.append(current_x)
+            
+            # 履歴が1秒分（30個）溜まるまでは判定しない
+            if len(self.pos_history_x) < self.HISTORY_SIZE:
+                return
+            
+            # 1秒前（リストの先頭）のデータを取り出す
+            past_x = self.pos_history_x.pop(0)
+            
+            diff = abs(current_x - past_x)
+            # print(f"Diff: {diff}") # デバッグ用
+
+            # 1秒間の移動距離が極めて小さければ停止とみなす
+            # ノイズを考慮して 0.0001 (0.1mm) 程度の閾値を設定するのが一般的です
+            if diff < 0.0001:
+                self.get_logger().info("Stop detected in PARKING. Transitioning to END.")
+                self.transition_to('STATE_END')
+                    
+    def handle_end(self):
         """
         状態 4: 状態3→1に2回遷移したら駐車に移行 
         今は何もしない 今後追加するかも？

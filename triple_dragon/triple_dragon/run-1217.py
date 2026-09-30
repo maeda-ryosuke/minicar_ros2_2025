@@ -314,11 +314,20 @@ def live(speed_mode, speed_raw_val, speed_gain_val, steering_gain_val, pwm_left_
             y = int(IMG_WIDTH * (y / 2.0 + 0.5))
             speed = float(out1[19])
         elif area_num == "STATE_4":
-            x = float(out1[20]) * steering_gain_val
-            y = float(out1[21])
+            x = float(out1[8]) * steering_gain_val
+            y = float(out1[9])
             x = int(IMG_WIDTH * (x / 2.0 + 0.5))
             y = int(IMG_WIDTH * (y / 2.0 + 0.5))
-            speed = float(out1[23])
+            speed = float(out1[10])
+        
+        elif area_num == "STACK":
+            x = 0.0
+            speed = -50.0
+
+        else:
+            print("STATEを受け取れませんでした")
+        # elif area_num == "STACK":
+        #     x = 0
         
         handle(x, pwm_left_val, pwm_right_val)
 
